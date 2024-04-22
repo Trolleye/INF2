@@ -24,7 +24,9 @@ public class Main extends ApplicationAdapter {
 		this.playerImage = new Texture("hero.png");
 		this.zombieImage = new Texture("zombie.png");
 		player = new Player(playerImage);
+		Zombie zombie = new Zombie(zombieImage);
 		UnitArrayList.add(player);
+		UnitArrayList.add(zombie);
 
 //		camera = new OrthographicCamera(1280, 720);
 //		camera.update();
@@ -36,7 +38,7 @@ public class Main extends ApplicationAdapter {
 		batch.begin();
 //		camera.position.set(player.getX(), player.getY(), 0);
 //		camera.update();
-	//	ScreenUtils.clear(1, 0, 0, 1);
+		ScreenUtils.clear(0, 0, 0, 0);
 		UnitUpdater.update(batch, UnitArrayList);
 //		batch.setProjectionMatrix(camera.combined);
 		batch.end();
