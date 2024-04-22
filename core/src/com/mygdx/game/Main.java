@@ -6,15 +6,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.units.Player;
+import com.mygdx.game.units.Unit;
 import com.mygdx.game.units.Zombie;
+
+import java.util.ArrayList;
 
 public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture playerImage;
 	Player player;
-	Zombie zombie;
 	Texture zombieImage;
-	OrthographicCamera camera;
+	ArrayList<Unit> UnitArrayList = new ArrayList<Unit>();
 
 	@Override
 	public void create () {
@@ -22,6 +24,7 @@ public class Main extends ApplicationAdapter {
 		this.playerImage = new Texture("hero.png");
 		this.zombieImage = new Texture("zombie.png");
 		player = new Player(playerImage);
+		UnitArrayList.add(player);
 
 //		camera = new OrthographicCamera(1280, 720);
 //		camera.update();
@@ -34,7 +37,7 @@ public class Main extends ApplicationAdapter {
 //		camera.position.set(player.getX(), player.getY(), 0);
 //		camera.update();
 	//	ScreenUtils.clear(1, 0, 0, 1);
-		player.vykresli(batch);
+		UnitUpdater.update(batch, UnitArrayList);
 //		batch.setProjectionMatrix(camera.combined);
 		batch.end();
 	}
@@ -42,7 +45,5 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		zombieImage.dispose();
-		playerImage.dispose();
 	}
 }

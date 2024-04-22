@@ -2,6 +2,7 @@ package com.mygdx.game.units;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player extends Unit{
@@ -29,9 +30,15 @@ public class Player extends Unit{
             getSprite().flip(true,false);
             otocenie=1;
             }
-        };
+        }
         if(Gdx.input.isKeyPressed(Input.Keys.S)) pozicia.y-=deltaTime*rychlost;
         if(Gdx.input.isKeyPressed(Input.Keys.W)) pozicia.y+=deltaTime*rychlost;
+    }
+
+    @Override
+    public void vykresli(SpriteBatch batch) {
+        pohyb(Gdx.graphics.getDeltaTime());
+        batch.draw(getSprite(), pozicia.x, pozicia.y);
     }
 
     public float getX() {
