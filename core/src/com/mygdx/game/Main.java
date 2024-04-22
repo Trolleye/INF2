@@ -17,6 +17,7 @@ public class Main extends ApplicationAdapter {
 	Player player;
 	Texture zombieImage;
 	ArrayList<Unit> UnitArrayList = new ArrayList<Unit>();
+	private OrthographicCamera camera;
 
 	@Override
 	public void create () {
@@ -28,19 +29,19 @@ public class Main extends ApplicationAdapter {
 		UnitArrayList.add(player);
 		UnitArrayList.add(zombie);
 
-//		camera = new OrthographicCamera(1280, 720);
-//		camera.update();
-//		camera.setToOrtho(false);
+		camera = new OrthographicCamera(1280, 720);
+		camera.update();
+		camera.setToOrtho(false);
 	}
 
 	@Override
 	public void render () {
 		batch.begin();
-//		camera.position.set(player.getX(), player.getY(), 0);
-//		camera.update();
+		camera.position.set(player.getX(), player.getY(), 0);
+		camera.update();
 		ScreenUtils.clear(0, 0, 0, 0);
 		UnitUpdater.update(batch, UnitArrayList);
-//		batch.setProjectionMatrix(camera.combined);
+		batch.setProjectionMatrix(camera.combined);
 		batch.end();
 	}
 	
