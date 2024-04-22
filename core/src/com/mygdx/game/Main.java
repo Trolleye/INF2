@@ -6,27 +6,23 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.units.Player;
-import com.mygdx.game.units.Player2;
 import com.mygdx.game.units.Zombie;
-import org.w3c.dom.Text;
 
 public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
+	Texture playerImage;
 	Player player;
-	Player2 player2;
 	Zombie zombie;
-	Texture img2;
+	Texture zombieImage;
 	OrthographicCamera camera;
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("hero.png");
-		player = new Player(img);
-		img2 = new Texture("zombie.png");
-		player2 = new Player2(img2);
-		zombie = new Zombie();
+		this.playerImage = new Texture("hero.png");
+		this.zombieImage = new Texture("zombie.png");
+		player = new Player(playerImage);
+
 //		camera = new OrthographicCamera(1280, 720);
 //		camera.update();
 //		camera.setToOrtho(false);
@@ -37,10 +33,8 @@ public class Main extends ApplicationAdapter {
 		batch.begin();
 //		camera.position.set(player.getX(), player.getY(), 0);
 //		camera.update();
-		ScreenUtils.clear(1, 0, 0, 1);
+	//	ScreenUtils.clear(1, 0, 0, 1);
 		player.vykresli(batch);
-		player2.vykresli(batch);
-		zombie.vykresli(batch);
 //		batch.setProjectionMatrix(camera.combined);
 		batch.end();
 	}
@@ -48,6 +42,7 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		zombieImage.dispose();
+		playerImage.dispose();
 	}
 }
