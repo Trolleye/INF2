@@ -1,5 +1,6 @@
 package com.mygdx.game.units;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,20 +16,16 @@ public abstract class Unit {
 
     abstract void pohyb(float deltaTime);
 
-    public abstract void vykresli(SpriteBatch batch);
+    public void vykresli(SpriteBatch batch){
+        pohyb(Gdx.graphics.getDeltaTime());
+        batch.draw(getSprite(), pozicia.x, pozicia.y);
+    }
 
     protected Sprite getSprite(){
         return sprite;
     }
     protected Vector2 getPozicia(){
         return this.pozicia;
-    }
-    public float getX() {
-        return pozicia.x;
-    }
-
-    public float getY() {
-        return pozicia.y;
     }
 
     public void setPosition(int x, int y) {

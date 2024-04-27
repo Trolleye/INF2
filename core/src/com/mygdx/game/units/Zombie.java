@@ -1,23 +1,16 @@
 package com.mygdx.game.units;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Zombie extends Enemy{
-    public Zombie(Texture img, Player player) {
-        super(img, 0, 0, player);
+
+    private float rychlost = 200;
+    public Zombie(Player player) {
+        super(new Texture("zombie.png"), 0, 0, player);
     }
 
     @Override
     void pohyb(float deltaTime) {
-
+        otocitSprite();
     }
-
-    @Override
-    public void vykresli(SpriteBatch batch) {
-        pohyb(Gdx.graphics.getDeltaTime());
-        batch.draw(getSprite(), getPozicia().x, getPozicia().y);
-    }
-
 }
