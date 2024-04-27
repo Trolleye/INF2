@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Zombie extends Unit{
+public class Zombie extends Enemy{
     public Zombie(Texture img) {
         super(img, 0, 0);
     }

@@ -15,23 +15,20 @@ public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture playerImage;
 	Player player;
-	Texture zombieImage;
 	ArrayList<Unit> UnitArrayList = new ArrayList<Unit>();
+	EnemySpawner enemySpawner;
 	private OrthographicCamera camera;
 
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
+		this.batch = new SpriteBatch();
 		this.playerImage = new Texture("hero.png");
-		this.zombieImage = new Texture("zombie.png");
-		player = new Player(playerImage);
-		Zombie zombie = new Zombie(zombieImage);
-		UnitArrayList.add(player);
-		UnitArrayList.add(zombie);
-
-		camera = new OrthographicCamera(1280, 720);
-		camera.update();
-		camera.setToOrtho(false);
+		this.player = new Player(playerImage);
+		this.UnitArrayList.add(player);
+		this.enemySpawner = new EnemySpawner(player, UnitArrayList);
+		this.camera = new OrthographicCamera(1280, 720);
+		this.camera.update();
+		this.camera.setToOrtho(false);
 	}
 
 	@Override

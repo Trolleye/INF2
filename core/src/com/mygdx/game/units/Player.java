@@ -38,4 +38,8 @@ public class Player extends Unit{
         pohyb(Gdx.graphics.getDeltaTime());
         batch.draw(getSprite(), getPozicia().x, getPozicia().y);
     }
+
+    public Vector2 getPlayerPos(){
+        return getPozicia();
+    }
 }
