@@ -24,12 +24,7 @@ public abstract class Unit {
     protected Sprite getSprite(){
         return sprite;
     }
-    protected Vector2 getPozicia(){
+    protected Vector2 getPosition(){
         return this.pozicia;
-    }
-
-    public void setPosition(int x, int y) {
-        pozicia.x = x;
-        pozicia.y = y;
     }
 }

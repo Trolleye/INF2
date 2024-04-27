@@ -1,9 +1,10 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.units.Player;
 import com.mygdx.game.units.Unit;
+import com.mygdx.game.units.Vampire;
 import com.mygdx.game.units.Zombie;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class EnemySpawner {
     private final Player player;
     private  ArrayList<Unit> unitArrayList;
     private Circle kruhMensi = new Circle(0,0,100);
-    private Circle kruhVacsi = new Circle(0,0,200);
+    private Circle kruhVacsi = new Circle(0,0,500);
 
     public EnemySpawner(Player player, ArrayList unitArrayList) {
         this.player = player;
@@ -25,25 +26,32 @@ public class EnemySpawner {
     }
 
     public void spawn(){
-        unitArrayList.add(new Zombie(player, player.getPlayerPos().x+getNahodneX(),player.getPlayerPos().y+getNahodneY()));
-    }
-    private float getNahodneX(){
-        Random r = new Random();
-        float x =  (r.nextInt((int) (kruhVacsi.radius - kruhMensi.radius)) + kruhMensi.radius);
-        int temp = (Math.random() <= 0.5) ? 1 : 2;
-        if (temp==1){
-            x=-x;
-        }
-        return x;
+        Vector2 nahodnyVektor = generujNahodnyVektor(kruhMensi.radius, kruhVacsi.radius);
+        spawnRandomEnemy(player, player.getPlayerPos().x+nahodnyVektor.x,player.getPlayerPos().y+nahodnyVektor.y);
     }
 
-    private float getNahodneY() {
-        Random r = new Random();
-        float y = (r.nextInt((int) (kruhVacsi.radius - kruhMensi.radius)) + kruhMensi.radius);
-        int temp = (Math.random() <= 0.5) ? 1 : 2;
-        if (temp == 1) {
-            y = -y;
+    private Vector2 generujNahodnyVektor(float innerRadius, float outerRadius) {
+        Random rand = new Random();
+
+        double x = (rand.nextDouble() * (outerRadius * 2)) - outerRadius;
+        double y = (rand.nextDouble() * (outerRadius * 2)) - outerRadius;
+
+        double distance = Math.sqrt(x * x + y * y);
+
+        if (distance >= innerRadius && distance <= outerRadius) {
+            return new Vector2((float) x, (float) y);
         }
-        return y;
+        else {
+            // Ak by nebol v rozmedzi tak sa vykona znova
+            return generujNahodnyVektor(innerRadius, outerRadius);
+        }
+    }
+
+    private void spawnRandomEnemy(Player player, float x, float y){
+        Random rand = new Random();
+        switch (rand.nextInt(2)){
+            case 0: unitArrayList.add(new Zombie(player, x, y));
+            case 1: unitArrayList.add(new Vampire(player, x, y));
+        }
     }
 }

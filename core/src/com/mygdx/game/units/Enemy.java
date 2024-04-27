@@ -13,11 +13,11 @@ public abstract class Enemy extends Unit{
 
 
     protected void otocitSprite(){
-        if (getPlayerPos().x < getPozicia().x && this.otocenie==1){
+        if (getPlayerPos().x < getPosition().x && this.otocenie==1){
             getSprite().flip(true,false);
             this.otocenie = 0;
         }
-        if (getPlayerPos().x > getPozicia().x && this.otocenie==0){
+        if (getPlayerPos().x > getPosition().x && this.otocenie==0){
             getSprite().flip(true,false);
             this.otocenie = 1;
         }
