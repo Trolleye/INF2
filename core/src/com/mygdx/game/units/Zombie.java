@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Zombie extends Enemy{
-    public Zombie(Texture img) {
-        super(img, 0, 0);
+    public Zombie(Texture img, Player player) {
+        super(img, 0, 0, player);
     }
 
     @Override
