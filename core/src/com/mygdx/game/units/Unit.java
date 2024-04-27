@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Unit {
     private Vector2 pozicia;
     private Sprite sprite;
-    public Unit(Texture img, int x, int y) {
+    public Unit(Texture img, float x, float y) {
         this.sprite = new Sprite(img);
         this.pozicia = new Vector2(x, y);
     }

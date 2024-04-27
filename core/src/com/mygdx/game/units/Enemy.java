@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Enemy extends Unit{
     private Player player;
     private int otocenie = 1;
-    public Enemy(Texture img, int x, int y, Player player) {
+    public Enemy(Texture img, float x, float y, Player player) {
         super(img, x, y);
         this.player = player;
     }

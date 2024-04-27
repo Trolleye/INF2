@@ -8,7 +8,8 @@ public class Player extends Unit{
     private int otocenie = 1;
     private float rychlost = 250;
     public Player(){
-        super(new Texture("hero.png"), Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+        super(new Texture("hero.png"), 0, 0);
+        System.out.println(getPlayerPos());
     }
 
     @Override

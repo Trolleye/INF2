@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -33,6 +35,9 @@ public class Main extends ApplicationAdapter {
 		camera.update();
 		ScreenUtils.clear(0, 0, 0, 0);
 		UnitUpdater.update(batch, UnitArrayList);
+		if(Gdx.input.isKeyPressed(Input.Keys.P)){
+			enemySpawner.spawn();
+		}
 		batch.setProjectionMatrix(camera.combined);
 		batch.end();
 	}
