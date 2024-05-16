@@ -4,34 +4,39 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player extends Unit{
+public class Player extends Unit {
     private int otocenie = 1;
-    private float rychlost = 250;
-    public Player(){
+
+    public Player() {
         super(new Texture("hero.png"), 0, 0);
     }
 
     @Override
-    public void pohyb(float deltaTime){
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-            getPosition().x-=deltaTime*rychlost;
-            if(otocenie==1){
-                getSprite().flip(true,false);
-                otocenie=0;
+    public void pohyb(float deltaTime) {
+        float speed = 250;
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+            this.getPosition().x -= deltaTime * speed;
+            if (this.otocenie == 1) {
+                this.getSprite().flip(true, false);
+                this.otocenie = 0;
             }
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
-            getPosition().x+=deltaTime*rychlost;
-            if(otocenie==0){
-            getSprite().flip(true,false);
-            otocenie=1;
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+            this.getPosition().x += deltaTime * speed;
+            if (this.otocenie == 0) {
+                this.getSprite().flip(true, false);
+                this.otocenie = 1;
             }
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) getPosition().y-=deltaTime*rychlost;
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) getPosition().y+=deltaTime*rychlost;
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+            this.getPosition().y -= deltaTime * speed;
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+            this.getPosition().y += deltaTime * speed;
+        }
     }
 
-    public Vector2 getPlayerPos(){
-        return getPosition();
+    public Vector2 getPlayerPos() {
+        return this.getPosition();
     }
 }

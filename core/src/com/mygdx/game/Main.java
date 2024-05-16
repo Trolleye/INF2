@@ -22,28 +22,33 @@ public class Main extends ApplicationAdapter {
 	public void create () {
 		this.batch = new SpriteBatch();
 		this.player = new Player();
-		this.UnitArrayList.add(player);
-		this.enemySpawner = new EnemySpawner(player, UnitArrayList);
+		this.UnitArrayList.add(this.player);
+		this.enemySpawner = new EnemySpawner(this.player, this.UnitArrayList);
 		this.camera = new OrthographicCamera(1280, 720);
 		this.camera.setToOrtho(false);
 	}
 
 	@Override
 	public void render () {
-		batch.begin();
-		camera.position.set(player.getPlayerPos().x, player.getPlayerPos().y, 0);
-		camera.update();
+		this.batch.begin();
+		this.camera.position.set(this.player.getPlayerPos().x, this.player.getPlayerPos().y, 0);
+		this.camera.update();
 		ScreenUtils.clear(0, 0, 0, 0);
-		UnitUpdater.update(batch, UnitArrayList);
-		if(Gdx.input.isKeyPressed(Input.Keys.P)){
-			enemySpawner.spawn();
+	if (Gdx.input.isKeyPressed(Input.Keys.P)) {
+				this.enemySpawner.spawn();
+	}
+		if (Gdx.input.isKeyPressed(Input.Keys.O)) {
+			this.UnitArrayList.clear();
 		}
-		batch.setProjectionMatrix(camera.combined);
-		batch.end();
+		for (Unit unit : this.UnitArrayList) {
+			unit.vykresli(this.batch);
+		}
+		this.batch.setProjectionMatrix(this.camera.combined);
+		this.batch.end();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
+		this.batch.dispose();
 	}
 }

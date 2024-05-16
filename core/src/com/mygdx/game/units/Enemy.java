@@ -3,12 +3,14 @@ package com.mygdx.game.units;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
-public abstract class Enemy extends Unit{
+public abstract class Enemy extends Unit {
     private final Player player;
     private final int speed;
     private int otocenie = 1;
     private final Vector2 movement = new Vector2();
     private final Vector2 posOfPlayer = new Vector2();
+    private final Vector2 playerPos = new Vector2(0, 0);
+
     public Enemy(Texture img, float x, float y, int speed, Player player) {
         super(img, x, y);
         this.player = player;
@@ -16,41 +18,36 @@ public abstract class Enemy extends Unit{
     }
 
     @Override
-    void pohyb(float deltaTime){
-        posOfPlayer.x = player.getPlayerPos().x;
-        this.posOfPlayer.y = player.getPlayerPos().y;
-
-        Vector2 directionOfMove = posOfPlayer.sub(this.getPosition()).nor();
-
-        float moveDistance = speed * deltaTime;
-
-
-        movement.x = directionOfMove.x * moveDistance;
-        movement.y = directionOfMove.y * moveDistance;
-
-        this.getPosition().x += movement.x;
-        this.getPosition().y += movement.y;
+    void pohyb(float deltaTime) {
+        this.getPosition().x += this.getMoveToPlayer(deltaTime).x;
+        this.getPosition().y += this.getMoveToPlayer(deltaTime).y;
         this.otocitSprite();
     }
 
-    protected Vector2 getMovement() {
-        return movement;
+    protected float getLengthFromPlayer() {
+        this.playerPos.x = this.getPlayerPos().x;
+        this.playerPos.y = this.getPlayerPos().y;
+        return this.playerPos.sub(this.getPosition()).len();
     }
 
-    protected int getSpeed(){
-        return this.speed;
-    }
-    protected Vector2 getPosOfPlayer() {
-        return posOfPlayer;
+    protected Vector2 getMoveToPlayer(float deltaTime) {
+        this.posOfPlayer.x = this.player.getPlayerPos().x;
+        this.posOfPlayer.y = this.player.getPlayerPos().y;
+        Vector2 directionOfMove = this.posOfPlayer.sub(this.getPosition()).nor();
+        float moveDistance = this.speed * deltaTime;
+        this.movement.x = directionOfMove.x * moveDistance;
+        this.movement.y = directionOfMove.y * moveDistance;
+        return this.movement;
     }
 
-    protected void otocitSprite(){
-        if (getPlayerPos().x < getPosition().x && this.otocenie==1){
-            getSprite().flip(true,false);
+
+    protected void otocitSprite() {
+        if (this.getPlayerPos().x < this.getPosition().x && this.otocenie == 1) {
+            this.getSprite().flip(true, false);
             this.otocenie = 0;
         }
-        if (getPlayerPos().x > getPosition().x && this.otocenie==0){
-            getSprite().flip(true,false);
+        if (this.getPlayerPos().x > this.getPosition().x && this.otocenie == 0) {
+            this.getSprite().flip(true, false);
             this.otocenie = 1;
         }
     }

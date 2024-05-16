@@ -1,6 +1,4 @@
 package com.mygdx.game;
-
-import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.units.Player;
 import com.mygdx.game.units.Unit;
@@ -13,21 +11,16 @@ import java.util.Random;
 public class EnemySpawner {
 
     private final Player player;
-    private  ArrayList<Unit> unitArrayList;
-    private Circle kruhMensi = new Circle(0,0,100);
-    private Circle kruhVacsi = new Circle(0,0,500);
-
-    public EnemySpawner(Player player, ArrayList unitArrayList) {
+    private final ArrayList<Unit> unitArrayList;
+    public EnemySpawner(Player player, ArrayList<Unit> unitArrayList) {
         this.player = player;
         this.unitArrayList = unitArrayList;
-        kruhMensi.setPosition(player.getPlayerPos());
-        kruhVacsi.setPosition(player.getPlayerPos());
-        spawn();
+        this.spawn();
     }
 
-    public void spawn(){
-        Vector2 nahodnyVektor = generujNahodnyVektor(kruhMensi.radius, kruhVacsi.radius);
-        spawnRandomEnemy(player, player.getPlayerPos().x+nahodnyVektor.x,player.getPlayerPos().y+nahodnyVektor.y);
+    public void spawn() {
+        Vector2 nahodnyVektor = this.generujNahodnyVektor(100, 500);
+        this.spawnRandomEnemy(this.player, this.player.getPlayerPos().x + nahodnyVektor.x, this.player.getPlayerPos().y + nahodnyVektor.y);
     }
 
     private Vector2 generujNahodnyVektor(float innerRadius, float outerRadius) {
@@ -39,19 +32,20 @@ public class EnemySpawner {
         double distance = Math.sqrt(x * x + y * y);
 
         if (distance >= innerRadius && distance <= outerRadius) {
-            return new Vector2((float) x, (float) y);
-        }
-        else {
+            return new Vector2((float)x, (float)y);
+        } else {
             // Ak by nebol v rozmedzi tak sa vykona znova
-            return generujNahodnyVektor(innerRadius, outerRadius);
+            return this.generujNahodnyVektor(innerRadius, outerRadius);
         }
     }
 
-    private void spawnRandomEnemy(Player player, float x, float y){
+    private void spawnRandomEnemy(Player player, float x, float y) {
         Random rand = new Random();
-        switch (rand.nextInt(2)){
-            case 0: unitArrayList.add(new Zombie(player, x, y));
-            case 1: unitArrayList.add(new Vampire(player, x, y));
+        switch (rand.nextInt(2)) {
+            case 0: this.unitArrayList.add(new Zombie(player, x, y));
+                    break;
+            case 1: this.unitArrayList.add(new Vampire(player, x, y));
+                    break;
         }
     }
 }

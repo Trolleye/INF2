@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public abstract class Unit {
-    private Vector2 pozicia;
-    private Sprite sprite;
+    private final Vector2 pozicia;
+    private final Sprite sprite;
     public Unit(Texture img, float x, float y) {
         this.sprite = new Sprite(img);
         this.pozicia = new Vector2(x, y);
@@ -16,15 +16,15 @@ public abstract class Unit {
 
     abstract void pohyb(float deltaTime);
 
-    public void vykresli(SpriteBatch batch){
-        pohyb(Gdx.graphics.getDeltaTime());
-        batch.draw(getSprite(), pozicia.x, pozicia.y);
+    public void vykresli(SpriteBatch batch) {
+        this.pohyb(Gdx.graphics.getDeltaTime());
+        batch.draw(this.getSprite(), this.pozicia.x, this.pozicia.y);
     }
 
-    protected Sprite getSprite(){
-        return sprite;
+    protected Sprite getSprite() {
+        return this.sprite;
     }
-    protected Vector2 getPosition(){
+    protected Vector2 getPosition() {
         return this.pozicia;
     }
 }
