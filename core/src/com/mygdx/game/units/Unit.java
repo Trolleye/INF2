@@ -18,9 +18,13 @@ public abstract class Unit {
 
     public void vykresli(SpriteBatch batch) {
         this.pohyb(Gdx.graphics.getDeltaTime());
+        this.attack(Gdx.graphics.getDeltaTime(), batch);
         batch.draw(this.getSprite(), this.pozicia.x, this.pozicia.y);
     }
-
+    protected Texture getTexture() {
+        return this.sprite.getTexture();
+    }
+    abstract void attack(float deltaTime, SpriteBatch batch);
     protected Sprite getSprite() {
         return this.sprite;
     }

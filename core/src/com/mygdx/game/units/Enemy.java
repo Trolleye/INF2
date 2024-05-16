@@ -9,7 +9,7 @@ public abstract class Enemy extends Unit {
     private int otocenie = 1;
     private final Vector2 movement = new Vector2();
     private final Vector2 posOfPlayer = new Vector2();
-    private final Vector2 playerPos = new Vector2(0, 0);
+    private final Vector2 playerPos = new Vector2();
 
     public Enemy(Texture img, float x, float y, int speed, Player player) {
         super(img, x, y);

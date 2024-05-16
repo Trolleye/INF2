@@ -1,6 +1,7 @@
 package com.mygdx.game.units;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
 public class Vampire extends Enemy {
@@ -16,5 +17,10 @@ public class Vampire extends Enemy {
             this.getPosition().y += move.y;
         }
         this.otocitSprite();
+    }
+
+    @Override
+    void attack(float deltaTime, SpriteBatch batch) {
+
     }
 }
