@@ -8,12 +8,13 @@ import com.badlogic.gdx.math.Vector2;
 import java.util.ArrayList;
 
 public class Player extends Unit {
+    private final ArrayList<Unit> unitArrayList;
     private int otocenie = 1;
-    private final Vector2 cursorPosition = new Vector2();
     private final ArrayList<PlayerProjectile> projectiles = new ArrayList<PlayerProjectile>();
     private float cooldown = 3;
-    public Player() {
+    public Player(ArrayList<Unit> unitArrayList) {
         super(new Texture("hero.png"), 0, 0);
+        this.unitArrayList = unitArrayList;
     }
 
     @Override
@@ -43,10 +44,21 @@ public class Player extends Unit {
 
     @Override
     void attack(float deltaTime, SpriteBatch batch) {
-        System.out.println(Gdx.input.getY() - 399);
         this.cooldown -= deltaTime;
+        float closestEnemyRange = 99999;
+        Enemy closestEnemy = null;
+        for (int i = 1; i < unitArrayList.size(); i++) {
+            if (unitArrayList.get(i)instanceof Enemy) {
+                if (((Enemy) unitArrayList.get(i)).getLengthFromPlayer() <= closestEnemyRange) {
+                    closestEnemyRange = ((Enemy)this.unitArrayList.get(i)).getLengthFromPlayer();
+                    closestEnemy = (Enemy) this.unitArrayList.get(i);
+                }
+            }
+        }
        // if (this.cooldown < 0) {
-            this.projectiles.add(new PlayerProjectile(new Vector2(Gdx.input.getX() - 667 + this.getPosition().x, Gdx.input.getY() - 399 + this.getPosition().y), this.getPlayerPos(), this.getTexture()));
+
+                this.projectiles.add(new PlayerProjectile(new Vector2(closestEnemy.getPosition().x + closestEnemy.getSprite().getWidth() / 2, closestEnemy.getPosition().y + closestEnemy.getSprite().getHeight() / 2), this.getPlayerPos(), this.getTexture()));
+
             this.cooldown = 100;
      //   }
         for (PlayerProjectile projectile : this.projectiles) {

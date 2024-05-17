@@ -21,7 +21,7 @@ public class Main extends ApplicationAdapter {
     @Override
     public void create () {
         this.batch = new SpriteBatch();
-        this.player = new Player();
+        this.player = new Player(this.unitArrayList);
         this.unitArrayList.add(this.player);
         this.enemySpawner = new EnemySpawner(this.player, this.unitArrayList);
         this.camera = new OrthographicCamera(1280, 720);

@@ -14,6 +14,10 @@ public abstract class Unit {
         this.pozicia = new Vector2(x, y);
     }
 
+
+    public void getTest() {
+        this.sprite.rotate90(true);
+    }
     abstract void pohyb(float deltaTime);
 
     public void vykresli(SpriteBatch batch) {
