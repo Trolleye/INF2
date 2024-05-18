@@ -9,17 +9,25 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class Unit {
     private final Vector2 pozicia;
     private final Sprite sprite;
-    public Unit(Texture img, float x, float y) {
+    private boolean isDead = false;
+
+
+
+    private int hitbox;
+    public Unit(Texture img, float x, float y, int hitbox) {
         this.sprite = new Sprite(img);
+        this.hitbox = hitbox;
         this.pozicia = new Vector2(x, y);
-    }
-
-
-    public void getTest() {
-        this.sprite.rotate90(true);
     }
     abstract void pohyb(float deltaTime);
 
+    public Vector2 getPozicia() {
+        return this.pozicia;
+    }
+
+    public int getHitbox() {
+        return this.hitbox;
+    }
     public void vykresli(SpriteBatch batch) {
         this.pohyb(Gdx.graphics.getDeltaTime());
         this.attack(Gdx.graphics.getDeltaTime(), batch);
@@ -34,5 +42,17 @@ public abstract class Unit {
     }
     protected Vector2 getPosition() {
         return this.pozicia;
+    }
+    public void unitDeath() {
+        this.isDead = true;
+    }
+
+
+    public float getLengthFromUnit(Vector2 unitPos) {
+        return new Vector2(unitPos.x, unitPos.y).sub(this.getPosition()).len();
+    }
+
+    public boolean isDead() {
+        return this.isDead;
     }
 }

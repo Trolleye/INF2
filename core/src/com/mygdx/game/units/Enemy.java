@@ -9,10 +9,9 @@ public abstract class Enemy extends Unit {
     private int otocenie = 1;
     private final Vector2 movement = new Vector2();
     private final Vector2 posOfPlayer = new Vector2();
-    private final Vector2 playerPos = new Vector2();
 
-    public Enemy(Texture img, float x, float y, int speed, Player player) {
-        super(img, x, y);
+    public Enemy(Texture img, float x, float y, int speed, Player player, int hitbox) {
+        super(img, x, y, hitbox);
         this.player = player;
         this.speed = speed;
     }
@@ -24,11 +23,7 @@ public abstract class Enemy extends Unit {
         this.otocitSprite();
     }
 
-    protected float getLengthFromPlayer() {
-        this.playerPos.x = this.getPlayerPos().x;
-        this.playerPos.y = this.getPlayerPos().y;
-        return this.playerPos.sub(this.getPosition()).len();
-    }
+
 
     protected Vector2 getMoveToPlayer(float deltaTime) {
         this.posOfPlayer.x = this.player.getPlayerPos().x;
@@ -53,5 +48,9 @@ public abstract class Enemy extends Unit {
     }
     protected Vector2 getPlayerPos() {
         return this.player.getPosition();
+    }
+    protected Unit getPlayer() {
+        return this.player;
+
     }
 }

@@ -1,11 +1,13 @@
-package com.mygdx.game.units;
+package com.mygdx.game.projectiles;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import jdk.internal.vm.vector.VectorSupport;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public abstract class Projectile {
     private final Vector2 position;
@@ -14,7 +16,8 @@ public abstract class Projectile {
     private final float speed;
     private final Vector2 beginningPosition;
 
-    public Projectile(Texture img, Vector2 targetPosition, Vector2 startingPosition, Texture unitTexture, float speed) {
+
+    public Projectile(Texture img, Vector2 targetPosition, Vector2 startingPosition, float speed) {
         this.sprite = new Sprite(img);
         this.speed = speed;
         this.targetPosition = new Vector2(targetPosition);
@@ -23,11 +26,12 @@ public abstract class Projectile {
     }
 
     private void pohyb(float deltaTime) {
-        Vector2 moveVector = getMoveToTarget(deltaTime);
+        Vector2 moveVector = this.getMoveToTarget(deltaTime);
         this.position.add(moveVector);
     }
 
     public void vykresli(SpriteBatch batch) {
+        this.checkNearEnemy();
         this.pohyb(Gdx.graphics.getDeltaTime());
         batch.draw(this.getSprite(), this.position.x, this.position.y);
     }
@@ -40,4 +44,8 @@ public abstract class Projectile {
         Vector2 directionOfMove = new Vector2(positionOfTarget).sub(this.beginningPosition).nor();
         return directionOfMove.scl(this.speed * deltaTime);
     }
+    protected Vector2 getPosition() {
+        return this.position;
+    }
+    abstract void checkNearEnemy();
 }

@@ -15,7 +15,7 @@ public class Main extends ApplicationAdapter {
     private SpriteBatch batch;
     private Player player;
     private final ArrayList<Unit> unitArrayList = new ArrayList<Unit>();
-    private EnemySpawner enemySpawner;
+    private UnitsManager unitsManager;
     private OrthographicCamera camera;
 
     @Override
@@ -23,7 +23,7 @@ public class Main extends ApplicationAdapter {
         this.batch = new SpriteBatch();
         this.player = new Player(this.unitArrayList);
         this.unitArrayList.add(this.player);
-        this.enemySpawner = new EnemySpawner(this.player, this.unitArrayList);
+        this.unitsManager = new UnitsManager(this.player, this.unitArrayList);
         this.camera = new OrthographicCamera(1280, 720);
         this.camera.setToOrtho(false);
     }
@@ -33,9 +33,10 @@ public class Main extends ApplicationAdapter {
         this.batch.begin();
         this.camera.position.set(this.player.getPlayerPos().x, this.player.getPlayerPos().y, 0);
         this.camera.update();
+        this.unitsManager.manageUnits();
         ScreenUtils.clear(0, 0, 0, 0);
         if (Gdx.input.isKeyPressed(Input.Keys.P)) {
-            this.enemySpawner.spawn();
+            this.unitsManager.spawn();
         }
         if (Gdx.input.isKeyPressed(Input.Keys.O)) {
             this.unitArrayList.clear();
