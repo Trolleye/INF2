@@ -2,10 +2,11 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Logic.UnitsManager;
 import com.mygdx.game.units.Player;
 import com.mygdx.game.units.Unit;
 
@@ -31,20 +32,20 @@ public class Main extends ApplicationAdapter {
     @Override
     public void render () {
         this.batch.begin();
-        this.camera.position.set(this.player.getPlayerPos().x, this.player.getPlayerPos().y, 0);
-        this.camera.update();
-        this.unitsManager.manageUnits(Gdx.graphics.getDeltaTime());
-        ScreenUtils.clear(0, 0, 0, 0);
-        if (Gdx.input.isKeyPressed(Input.Keys.P)) {
-            this.unitsManager.spawn();
+        if (!this.player.isDead()) {
+            this.camera.position.set(this.player.getPlayerPos().x, this.player.getPlayerPos().y, 0);
+            this.camera.update();
+            this.unitsManager.manageUnits(Gdx.graphics.getDeltaTime());
+            ScreenUtils.clear(0, 0, 0, 0);
+            for (Unit unit : this.unitArrayList) {
+                unit.vykresli(this.batch);
+            }
+            this.batch.setProjectionMatrix(this.camera.combined);
+        } else {
+            BitmapFont text = new BitmapFont();
+            text.getData().setScale(4.0f);
+            text.draw(this.batch, "YOU LOST", this.player.getPozicia().x - 120, this.player.getPozicia().y);
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.O)) {
-            this.unitArrayList.clear();
-        }
-        for (Unit unit : this.unitArrayList) {
-            unit.vykresli(this.batch);
-        }
-        this.batch.setProjectionMatrix(this.camera.combined);
         this.batch.end();
     }
 

@@ -3,7 +3,6 @@ package com.mygdx.game.units;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.projectiles.Projectile;
 
 public class Vampire extends Enemy {
     private float cooldown = 4;
@@ -28,6 +27,9 @@ public class Vampire extends Enemy {
                 this.cooldown = 4;
             }
             this.cooldown -= deltaTime;
+        }
+        if (this.getLengthFromUnit(this.getPlayerPos()) < this.getPlayer().getHitbox() ) {
+            this.getPlayer().unitDeath();
         }
     }
 

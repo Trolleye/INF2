@@ -6,7 +6,7 @@ public class DesktopLauncher {
     public static void main(String[] arg) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setResizable(false);
-        config.setWindowedMode(1280, 720);
+        config.setWindowedMode(1800, 900);
         config.setForegroundFPS(60);
         config.setTitle("Hero Survivors");
         new Lwjgl3Application(new Main(), config);

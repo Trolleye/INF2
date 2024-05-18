@@ -2,6 +2,8 @@ package com.mygdx.game.units;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.units.Player;
+import com.mygdx.game.units.Unit;
 
 public abstract class Enemy extends Unit {
     private final Player player;
