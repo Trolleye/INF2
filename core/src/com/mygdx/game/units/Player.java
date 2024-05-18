@@ -44,7 +44,7 @@ public class Player extends Unit {
     }
 
     @Override
-    void attack(float deltaTime, SpriteBatch batch) {
+    public void attack(float deltaTime, SpriteBatch batch) {
         this.cooldown -= deltaTime;
         this.enemyHit();
         if (this.cooldown < 0) {
@@ -56,12 +56,17 @@ public class Player extends Unit {
         }
         if (!this.projectiles.isEmpty()) {
             for (PlayerProjectile projectile : this.projectiles) {
-                projectile.vykresli(batch);
+                projectile.update(batch);
             }
         }
     }
+    public Vector2 getPlayerPos() {
+        return this.getPosition();
+    }
 
-
+    public void enemyHit() {
+        this.projectiles.removeIf(PlayerProjectile::isEnemyHit);
+    }
 
     private Enemy getEnemy() {
         float closestEnemyRange = 99999;
@@ -79,11 +84,5 @@ public class Player extends Unit {
         return closestEnemy;
     }
 
-    public Vector2 getPlayerPos() {
-        return this.getPosition();
-    }
 
-    public void enemyHit() {
-        this.projectiles.removeIf(PlayerProjectile::isEnemyHit);
-    }
 }

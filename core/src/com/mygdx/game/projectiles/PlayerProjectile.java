@@ -15,8 +15,11 @@ public class PlayerProjectile extends Projectile {
         this.unitArrayList = unitArrayList;
     }
 
+    public boolean isEnemyHit() {
+        return this.enemyHit;
+    }
     @Override
-    void checkNearEnemy() {
+    protected void checkNearEnemy() {
         for (int i = 1; i < this.unitArrayList.size(); i++) {
             if (this.unitArrayList.get(i) instanceof Enemy) {
                 if (this.unitArrayList.get(i).getLengthFromUnit(this.getPosition()) < this.unitArrayList.get(i).getHitbox()) {
@@ -27,7 +30,4 @@ public class PlayerProjectile extends Projectile {
         }
     }
 
-    public boolean isEnemyHit() {
-        return this.enemyHit;
-    }
 }

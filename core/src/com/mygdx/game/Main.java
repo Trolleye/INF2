@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.logic.ScoreCounter;
 import com.mygdx.game.logic.UnitsManager;
-import com.mygdx.game.logic.WriteHighScoreException;
+import com.mygdx.game.exceptions.WriteHighScoreException;
 import com.mygdx.game.units.Player;
 import com.mygdx.game.units.Unit;
 

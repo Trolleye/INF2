@@ -12,7 +12,7 @@ public class EnemyProjectile extends Projectile {
     }
 
     @Override
-    void checkNearEnemy() {
+    protected void checkNearEnemy() {
         if (this.player.getLengthFromUnit(this.getPosition()) < this.player.getHitbox()) {
             this.player.unitDeath();
         }

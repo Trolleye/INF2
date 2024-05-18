@@ -21,16 +21,14 @@ public abstract class Projectile {
         this.position = new Vector2(startingPosition);
         this.beginningPosition = new Vector2(startingPosition);
     }
-
-    private void pohyb(float deltaTime) {
+    public void update(SpriteBatch batch) {
+        this.checkNearEnemy();
+        this.move(Gdx.graphics.getDeltaTime());
+        batch.draw(this.getSprite(), this.position.x, this.position.y);
+    }
+    private void move(float deltaTime) {
         Vector2 moveVector = this.getMoveToTarget(deltaTime);
         this.position.add(moveVector);
-    }
-
-    public void vykresli(SpriteBatch batch) {
-        this.checkNearEnemy();
-        this.pohyb(Gdx.graphics.getDeltaTime());
-        batch.draw(this.getSprite(), this.position.x, this.position.y);
     }
     protected Sprite getSprite() {
         return this.sprite;
@@ -44,5 +42,5 @@ public abstract class Projectile {
     protected Vector2 getPosition() {
         return this.position;
     }
-    abstract void checkNearEnemy();
+    protected abstract void checkNearEnemy();
 }

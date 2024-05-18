@@ -7,11 +7,11 @@ import com.badlogic.gdx.math.Vector2;
 public class Vampire extends Enemy {
     private float cooldown = 4;
     public Vampire(Player player, float x, float y) {
-        super(new Texture(  "vampire.png"), x, y, 200, player, 60);
+        super(new Texture(  "vampire.png"), x, y, 200, player, 50);
     }
 
     @Override
-    void update(float deltaTime) {
+    public void update(float deltaTime) {
         if (this.getLengthFromUnit(this.getPlayer().getPosition()) > 300) {
             Vector2 move = this.getMoveToPlayer(deltaTime);
             this.getPosition().x += move.x;
@@ -21,7 +21,7 @@ public class Vampire extends Enemy {
     }
 
     @Override
-    void attack(float deltaTime, SpriteBatch batch) {
+    public void attack(float deltaTime, SpriteBatch batch) {
         this.cooldown -= deltaTime;
         if (this.getLengthFromUnit(this.getPlayerPos()) < this.getPlayer().getHitbox() ) {
             this.getPlayer().unitDeath();

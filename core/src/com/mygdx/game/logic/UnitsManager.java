@@ -23,8 +23,17 @@ public class UnitsManager {
         this.scoreCounter = scoreCounter;
         this.spawn();
     }
-
-    public void spawn() {
+    public void manageUnits(float deltaTime) {
+        for (Unit unit : this.unitArrayList) {
+            if (unit.isDead()) {
+                this.scoreCounter.gainScore();
+            }
+        }
+        this.unitArrayList.removeIf(Unit::isDead);
+        this.unitSpawner();
+        this.spawnEnemyOnTimer(deltaTime);
+    }
+    private void spawn() {
         Vector2 randomVector = this.generateRandomVector(300, 800);
         this.chooseRandomEnemy(this.player, this.player.getPlayerPos().x + randomVector.x, this.player.getPlayerPos().y + randomVector.y);
     }
@@ -57,16 +66,7 @@ public class UnitsManager {
         }
     }
 
-    public void manageUnits(float deltaTime) {
-        for (Unit unit : this.unitArrayList) {
-            if (unit.isDead()) {
-                this.scoreCounter.gainScore();
-            }
-        }
-        this.unitArrayList.removeIf(Unit::isDead);
-        this.unitSpawner();
-        this.spawnEnemyOnTimer(deltaTime);
-    }
+
 
     private void spawnEnemyOnTimer(float deltaTime) {
         this.cooldown -= deltaTime;

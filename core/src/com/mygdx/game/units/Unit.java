@@ -10,16 +10,13 @@ public abstract class Unit {
     private final Vector2 pozicia;
     private final Sprite sprite;
     private boolean isDead = false;
-
-
-
-    private int hitbox;
+    private final int hitbox;
     public Unit(Texture img, float x, float y, int hitbox) {
         this.sprite = new Sprite(img);
         this.hitbox = hitbox;
         this.pozicia = new Vector2(x, y);
     }
-    abstract void update(float deltaTime);
+    public abstract void update(float deltaTime);
 
     public Vector2 getPozicia() {
         return this.pozicia;
@@ -33,16 +30,11 @@ public abstract class Unit {
         this.attack(Gdx.graphics.getDeltaTime(), batch);
         batch.draw(this.getSprite(), this.pozicia.x, this.pozicia.y);
     }
-    protected Texture getTexture() {
-        return this.sprite.getTexture();
-    }
-    abstract void attack(float deltaTime, SpriteBatch batch);
+    public abstract void attack(float deltaTime, SpriteBatch batch);
     protected Sprite getSprite() {
         return this.sprite;
     }
-    protected Vector2 getPosition() {
-        return this.pozicia;
-    }
+
     public void unitDeath() {
         this.isDead = true;
     }
@@ -51,8 +43,10 @@ public abstract class Unit {
     public float getLengthFromUnit(Vector2 unitPos) {
         return new Vector2(unitPos.x, unitPos.y).sub(this.getPosition()).len();
     }
-
     public boolean isDead() {
         return this.isDead;
+    }
+    protected Vector2 getPosition() {
+        return this.pozicia;
     }
 }

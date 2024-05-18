@@ -10,7 +10,7 @@ public class Zombie extends Enemy {
 
 
     @Override
-    void attack(float deltaTime, SpriteBatch batch) {
+    public void attack(float deltaTime, SpriteBatch batch) {
         if (this.getLengthFromUnit(this.getPlayerPos()) < this.getPlayer().getHitbox() ) {
             this.getPlayer().unitDeath();
         }

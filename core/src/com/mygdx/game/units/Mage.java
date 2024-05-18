@@ -15,7 +15,7 @@ public class Mage extends Enemy {
     }
 
     @Override
-    void update(float deltaTime) {
+    public void update(float deltaTime) {
         if (this.getLengthFromUnit(this.getPlayer().getPosition()) > 500) {
             Vector2 move = this.getMoveToPlayer(deltaTime);
             this.getPosition().x += move.x;
@@ -26,7 +26,7 @@ public class Mage extends Enemy {
     }
 
     @Override
-    void attack(float deltaTime, SpriteBatch batch) {
+    public void attack(float deltaTime, SpriteBatch batch) {
         if (this.getLengthFromUnit(this.getPlayer().getPosition()) <= 500) {
             if (this.cooldown < 0) {
                 this.projectiles.add(new EnemyProjectile(this.getPlayerPos(), this.getPosition(), (Player)this.getPlayer()));
@@ -34,7 +34,7 @@ public class Mage extends Enemy {
             }
         }
         for (EnemyProjectile projectile : this.projectiles) {
-            projectile.vykresli(batch);
+            projectile.update(batch);
         }
         this.cooldown -= deltaTime;
     }

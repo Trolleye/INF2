@@ -43,7 +43,19 @@ tasks.register('dist', Jar) {
     with jar
 }
 
-
+task javaPackager(type: Exec, dependsOn: dist){
+    workingDir project.projectDir
+    commandLine = [
+            'javapackager',
+            '-deploy',
+            '-nosign',
+            '-outdir', "$(buildDir)/distribution",
+            '-srcdir', "$(buildDir)/libs",
+            '-native', 'image',
+            '-name', project.HeroSurvivors,
+            '-appclass', project.DesktopLauncher,
+    ]
+}
 dist.dependsOn classes
 
 eclipse.project.name = appName + "-desktop"
