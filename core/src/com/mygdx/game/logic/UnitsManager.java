@@ -1,6 +1,8 @@
-package com.mygdx.game.Logic;
+package com.mygdx.game.logic;
+
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.units.Bat;
+import com.mygdx.game.units.Mage;
 import com.mygdx.game.units.Player;
 import com.mygdx.game.units.Unit;
 import com.mygdx.game.units.Vampire;
@@ -13,10 +15,12 @@ public class UnitsManager {
 
     private final Player player;
     private final ArrayList<Unit> unitArrayList;
+    private final ScoreCounter scoreCounter;
     private float cooldown = 1;
-    public UnitsManager(Player player, ArrayList<Unit> unitArrayList) {
+    public UnitsManager(Player player, ArrayList<Unit> unitArrayList, ScoreCounter scoreCounter) {
         this.player = player;
         this.unitArrayList = unitArrayList;
+        this.scoreCounter = scoreCounter;
         this.spawn();
     }
 
@@ -43,24 +47,34 @@ public class UnitsManager {
 
     private void chooseRandomEnemy(Player player, float x, float y) {
         Random rand = new Random();
-        switch (rand.nextInt(2)) {
+        switch (rand.nextInt(3)) {
             case 0: this.unitArrayList.add(new Zombie(player, x, y));
                     break;
             case 1: this.unitArrayList.add(new Vampire(player, x, y));
+                    break;
+            case 2: this.unitArrayList.add(new Mage(player, x, y));
                     break;
         }
     }
 
     public void manageUnits(float deltaTime) {
+        for (Unit unit : this.unitArrayList) {
+            if (unit.isDead()) {
+                this.scoreCounter.gainScore();
+            }
+        }
         this.unitArrayList.removeIf(Unit::isDead);
         this.unitSpawner();
+        this.spawnEnemyOnTimer(deltaTime);
+    }
+
+    private void spawnEnemyOnTimer(float deltaTime) {
         this.cooldown -= deltaTime;
         if (this.cooldown <= 0) {
             this.spawn();
             this.cooldown = 0.5F;
         }
     }
-
     private void unitSpawner() {
         ArrayList<Unit> unitsToAdd = new ArrayList<>();
         for (Unit unit : this.unitArrayList) {

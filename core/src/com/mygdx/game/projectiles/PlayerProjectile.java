@@ -10,8 +10,8 @@ public class PlayerProjectile extends Projectile {
     private final ArrayList<Unit> unitArrayList;
     private boolean enemyHit = false;
 
-    public PlayerProjectile(Vector2 cursorPosition, Vector2 playerPosition, ArrayList<Unit> unitArrayList) {
-        super(new Texture("playerProjectile.png"), cursorPosition, playerPosition, 300);
+    public PlayerProjectile(Vector2 targetPosition, Vector2 playerPosition, ArrayList<Unit> unitArrayList) {
+        super(new Texture("playerProjectile.png"), targetPosition, playerPosition, 300);
         this.unitArrayList = unitArrayList;
     }
 

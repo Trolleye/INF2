@@ -22,18 +22,17 @@ public class Vampire extends Enemy {
 
     @Override
     void attack(float deltaTime, SpriteBatch batch) {
-        if (this.getLengthFromUnit(this.getPlayerPos()) <= 300) {
-            if (this.cooldown <= 0) {
-                this.cooldown = 4;
-            }
-            this.cooldown -= deltaTime;
-        }
+        this.cooldown -= deltaTime;
         if (this.getLengthFromUnit(this.getPlayerPos()) < this.getPlayer().getHitbox() ) {
             this.getPlayer().unitDeath();
         }
     }
 
     public boolean canSpawn() {
-        return this.cooldown <= 0;
+        if (this.cooldown <= 0) {
+            this.cooldown = 4;
+            return true;
+        }
+        return false;
     }
 }
