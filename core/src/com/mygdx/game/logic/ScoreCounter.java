@@ -8,17 +8,27 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+/**
+ * Trieda ScoreCounter slúži na sledovanie a manipuláciu so skóre hry.
+ */
 public class ScoreCounter {
     private final BitmapFont text;
     private final String highScoreFilePath;
     private  int score = 0;
 
+    /**
+     * Konštruktor triedy ScoreCounter.
+     * Vytvára novú inštanciu ScoreCounter s vytvoreným textovým fontom a prednastavenou cestou k súboru s najvyšším skóre.
+     */
     public ScoreCounter() {
         this.text = new BitmapFont();
         this.highScoreFilePath = "highscore.txt";
     }
 
+    /**
+     * Metóda pre získanie najvyššieho dosiahnutého skóre zo súboru.
+     * @return Textová reprezentácia najvyššieho skóre. Ak súbor neexistuje alebo nastane chyba pri čítaní, vráti sa "0".
+     */
     public String getHighScore() {
         Path path = Paths.get(this.highScoreFilePath);
         try {
@@ -32,15 +42,28 @@ public class ScoreCounter {
             return "0";
         }
     }
+    /**
+     * Metóda pre vykreslenie aktuálneho skóre na obrazovku.
+     * @param batch SpriteBatch na kreslenie
+     * @param x X-ová pozícia vykreslenia skóre
+     * @param y Y-ová pozícia vykreslenia skóre
+     */
 
     public void draw(SpriteBatch batch, float x, float y) {
         this.text.draw(batch, "Score: " + this.score, x, y);
     }
 
+    /**
+     * Metóda pre zvýšenie aktuálneho skóre o jedna.
+     */
     public void gainScore() {
         this.score++;
     }
 
+    /**
+     * Metóda pre zápis aktuálneho skóre do súboru, ak je vyššie ako najvyššie dosiahnuté skóre.
+     * @throws WriteHighScoreException Ak sa vyskytne chyba pri zápise do súboru
+     */
     public void writeHighScore() throws WriteHighScoreException {
         Path path = Paths.get(this.highScoreFilePath);
 

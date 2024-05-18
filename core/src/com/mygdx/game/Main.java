@@ -14,6 +14,10 @@ import com.mygdx.game.units.Unit;
 
 import java.util.ArrayList;
 
+/**
+ * Hlavná trieda Main predstavuje aplikáciu a riadi jej beh.
+ * Implementuje metódy z rozhrania ApplicationAdapter.
+ */
 public class Main extends ApplicationAdapter {
     private SpriteBatch batch;
     private Player player;
@@ -22,6 +26,9 @@ public class Main extends ApplicationAdapter {
     private OrthographicCamera camera;
     private ScoreCounter scoreCounter;
 
+    /**
+     * Metóda vytvára herný svet a inicializuje potrebné komponenty.
+     */
     @Override
     public void create () {
         this.batch = new SpriteBatch();
@@ -33,6 +40,9 @@ public class Main extends ApplicationAdapter {
         this.camera.setToOrtho(false);
     }
 
+    /**
+     * Metóda vykresľuje herný svet a aktualizuje jeho stav v každom snímku.
+     */
     @Override
     public void render () {
         this.batch.begin();
@@ -41,7 +51,7 @@ public class Main extends ApplicationAdapter {
             this.camera.update();
             this.unitsManager.manageUnits(Gdx.graphics.getDeltaTime());
             ScreenUtils.clear(0, 0, 0, 0);
-            this.scoreCounter.draw(this.batch, this.player.getPozicia().x - 890, this.player.getPozicia().y + 435);
+            this.scoreCounter.draw(this.batch, this.player.getPozicia().x - (float)Gdx.graphics.getWidth() / 2 + 10, this.player.getPozicia().y + (float)Gdx.graphics.getHeight() / 2 - 10);
 
             for (Unit unit : this.unitArrayList) {
                 unit.vykresli(this.batch);
@@ -59,11 +69,14 @@ public class Main extends ApplicationAdapter {
             } catch (WriteHighScoreException e) {
                 throw new RuntimeException(e);
             }
-            score.draw(this.batch, "Your Highscore: " + this.scoreCounter.getHighScore(), this.player.getPozicia().x - 80, this.player.getPozicia().y - 50);
+            score.draw(this.batch, "Your Highscore: " + this.scoreCounter.getHighScore(), this.player.getPozicia().x - 90, this.player.getPozicia().y - 50);
         }
         this.batch.end();
     }
 
+    /**
+     * Metóda uvoľňuje zdroje v používaných komponentoch.
+     */
     @Override
     public void dispose () {
         this.batch.dispose();

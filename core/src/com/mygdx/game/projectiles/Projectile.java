@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Abstraktná trieda Projectile predstavuje základ pre všetky projektilové objekty v hre.
+ */
 public abstract class Projectile {
     private final Vector2 position;
     private final Sprite sprite;
@@ -13,7 +16,13 @@ public abstract class Projectile {
     private final float speed;
     private final Vector2 beginningPosition;
 
-
+    /**
+     * Konštruktor triedy Projectile.
+     * @param img Textúra projektilu
+     * @param targetPosition Cieľová pozícia projektilu
+     * @param startingPosition Počiatočná pozícia projektilu
+     * @param speed Rýchlosť pohybu projektilu
+     */
     public Projectile(Texture img, Vector2 targetPosition, Vector2 startingPosition, float speed) {
         this.sprite = new Sprite(img);
         this.speed = speed;
@@ -21,6 +30,11 @@ public abstract class Projectile {
         this.position = new Vector2(startingPosition);
         this.beginningPosition = new Vector2(startingPosition);
     }
+
+    /**
+     * Aktualizuje stav projektilu a vykreslí ho na obrazovku.
+     * @param batch SpriteBatch pre vykreslenie
+     */
     public void update(SpriteBatch batch) {
         this.checkNearEnemy();
         this.move(Gdx.graphics.getDeltaTime());
