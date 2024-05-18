@@ -17,7 +17,7 @@ public abstract class Enemy extends Unit {
     }
 
     @Override
-    void pohyb(float deltaTime) {
+    void update(float deltaTime) {
         this.getPosition().x += this.getMoveToPlayer(deltaTime).x;
         this.getPosition().y += this.getMoveToPlayer(deltaTime).y;
         this.otocitSprite();

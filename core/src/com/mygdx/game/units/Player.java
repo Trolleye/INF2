@@ -6,20 +6,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.projectiles.PlayerProjectile;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class Player extends Unit {
     private final ArrayList<Unit> unitArrayList;
     private int otocenie = 1;
     private final ArrayList<PlayerProjectile> projectiles = new ArrayList<>();
-    private float cooldown = 3;
+    private float cooldown = 1;
     public Player(ArrayList<Unit> unitArrayList) {
         super(new Texture("hero.png"), 0, 0, 50);
         this.unitArrayList = unitArrayList;
     }
 
     @Override
-    public void pohyb(float deltaTime) {
+    public void update(float deltaTime) {
         float speed = 250;
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             this.getPosition().x -= deltaTime * speed;

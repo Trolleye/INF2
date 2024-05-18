@@ -1,7 +1,10 @@
 package com.mygdx.game;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.projectiles.PlayerProjectile;
-import com.mygdx.game.units.*;
+import com.mygdx.game.units.Bat;
+import com.mygdx.game.units.Player;
+import com.mygdx.game.units.Unit;
+import com.mygdx.game.units.Vampire;
+import com.mygdx.game.units.Zombie;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -10,6 +13,7 @@ public class UnitsManager {
 
     private final Player player;
     private final ArrayList<Unit> unitArrayList;
+    private float cooldown = 1;
     public UnitsManager(Player player, ArrayList<Unit> unitArrayList) {
         this.player = player;
         this.unitArrayList = unitArrayList;
@@ -17,7 +21,7 @@ public class UnitsManager {
     }
 
     public void spawn() {
-        Vector2 randomVector = this.generateRandomVector(100, 500);
+        Vector2 randomVector = this.generateRandomVector(300, 800);
         this.chooseRandomEnemy(this.player, this.player.getPlayerPos().x + randomVector.x, this.player.getPlayerPos().y + randomVector.y);
     }
 
@@ -47,20 +51,23 @@ public class UnitsManager {
         }
     }
 
-    public void manageUnits() {
+    public void manageUnits(float deltaTime) {
         this.unitArrayList.removeIf(Unit::isDead);
         this.unitSpawner();
+        this.cooldown -= deltaTime;
+        if (this.cooldown <= 0) {
+            this.spawn();
+            this.cooldown = 0.5F;
+        }
     }
 
     private void unitSpawner() {
         ArrayList<Unit> unitsToAdd = new ArrayList<>();
-
         for (Unit unit : this.unitArrayList) {
             if (unit instanceof Vampire && ((Vampire)unit).canSpawn()) {
                 unitsToAdd.add(new Bat(this.player, unit.getPozicia().x, unit.getPozicia().y));
             }
         }
-
         this.unitArrayList.addAll(unitsToAdd);
     }
 }

@@ -6,9 +6,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 public abstract class Projectile {
     private final Vector2 position;
     private final Sprite sprite;

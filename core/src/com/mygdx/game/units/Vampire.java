@@ -12,7 +12,7 @@ public class Vampire extends Enemy {
     }
 
     @Override
-    void pohyb(float deltaTime) {
+    void update(float deltaTime) {
         if (this.getLengthFromUnit(this.getPlayer().getPosition()) > 300) {
             Vector2 move = this.getMoveToPlayer(deltaTime);
             this.getPosition().x += move.x;

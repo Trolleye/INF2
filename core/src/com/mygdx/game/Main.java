@@ -33,7 +33,7 @@ public class Main extends ApplicationAdapter {
         this.batch.begin();
         this.camera.position.set(this.player.getPlayerPos().x, this.player.getPlayerPos().y, 0);
         this.camera.update();
-        this.unitsManager.manageUnits();
+        this.unitsManager.manageUnits(Gdx.graphics.getDeltaTime());
         ScreenUtils.clear(0, 0, 0, 0);
         if (Gdx.input.isKeyPressed(Input.Keys.P)) {
             this.unitsManager.spawn();

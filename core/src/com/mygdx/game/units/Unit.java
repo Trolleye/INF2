@@ -19,7 +19,7 @@ public abstract class Unit {
         this.hitbox = hitbox;
         this.pozicia = new Vector2(x, y);
     }
-    abstract void pohyb(float deltaTime);
+    abstract void update(float deltaTime);
 
     public Vector2 getPozicia() {
         return this.pozicia;
@@ -29,7 +29,7 @@ public abstract class Unit {
         return this.hitbox;
     }
     public void vykresli(SpriteBatch batch) {
-        this.pohyb(Gdx.graphics.getDeltaTime());
+        this.update(Gdx.graphics.getDeltaTime());
         this.attack(Gdx.graphics.getDeltaTime(), batch);
         batch.draw(this.getSprite(), this.pozicia.x, this.pozicia.y);
     }
