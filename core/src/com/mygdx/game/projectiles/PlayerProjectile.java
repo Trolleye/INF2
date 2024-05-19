@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  * Trieda PlayerProjectile predstavuje projektil vystrelený hráčom.
- * Tento projektil sleduje mieri na najbližšiu jednotku a pri kolízii s nejakou z nich sa zavolá ich smrť.
+ * Tento projektil mieri na najbližšiu jednotku a pri kolízii s nejakou z nich sa zavolá ich smrť.
  */
 public class PlayerProjectile extends Projectile {
     private final ArrayList<Unit> unitArrayList;

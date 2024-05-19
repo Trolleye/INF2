@@ -52,12 +52,10 @@ public class Main extends ApplicationAdapter {
             this.unitsManager.manageUnits(Gdx.graphics.getDeltaTime());
             ScreenUtils.clear(0, 0, 0, 0);
             this.scoreCounter.draw(this.batch, this.player.getPozicia().x - (float)Gdx.graphics.getWidth() / 2 + 10, this.player.getPozicia().y + (float)Gdx.graphics.getHeight() / 2 - 10);
-
+            this.batch.setProjectionMatrix(this.camera.combined);
             for (Unit unit : this.unitArrayList) {
                 unit.vykresli(this.batch);
             }
-
-            this.batch.setProjectionMatrix(this.camera.combined);
         } else {
             BitmapFont text = new BitmapFont();
             text.getData().setScale(4.0f);
