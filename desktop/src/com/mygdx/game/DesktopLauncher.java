@@ -12,7 +12,6 @@ public class DesktopLauncher {
     /**
      * Metóda main je vstupný bod pre spustenie hry.
      * Konfiguruje parametre okna a spúšťa hru.
-     * @param arg Argumenty príkazového riadku (nevyužívané)
      */
     public static void main(String[] arg) {
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
