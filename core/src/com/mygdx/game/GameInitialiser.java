@@ -46,7 +46,7 @@ public class GameInitialiser {
             text.draw(batch, "YOU LOST", this.player.getPozicia().x - 120, this.player.getPozicia().y);
             BitmapFont text2 = new BitmapFont();
             text2.getData().setScale(4.0f);
-            text2.draw(batch, "Press P to Start Again", this.player.getPozicia().x - 250, this.player.getPozicia().y - 300);
+            text2.draw(batch, "Press SPACE to Start Again", this.player.getPozicia().x - 320, this.player.getPozicia().y - 300);
             BitmapFont score = new BitmapFont();
             score.getData().setScale(2.0F);
             try {
@@ -56,5 +56,9 @@ public class GameInitialiser {
             }
             score.draw(batch, "Your Highscore: " + this.scoreCounter.getHighScore(), this.player.getPozicia().x - 90, this.player.getPozicia().y - 50);
         }
+    }
+
+    public boolean getPlayerDead() {
+        return this.player.isDead();
     }
 }

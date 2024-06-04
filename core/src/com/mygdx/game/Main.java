@@ -3,17 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.logic.ScoreCounter;
-import com.mygdx.game.logic.UnitsManager;
-import com.mygdx.game.exceptions.WriteHighScoreException;
-import com.mygdx.game.units.Player;
-import com.mygdx.game.units.Unit;
-
-import java.util.ArrayList;
 
 /**
  * Hlavná trieda Main predstavuje aplikáciu a riadi jej beh.
@@ -39,7 +29,7 @@ public class Main extends ApplicationAdapter {
     public void render () {
         this.batch.begin();
         this.newGame.update(this.batch);
-        if (Gdx.input.isKeyPressed(Input.Keys.P)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && this.newGame.getPlayerDead()) {
             this.newGame = new GameInitialiser();
         }
         this.batch.end();
