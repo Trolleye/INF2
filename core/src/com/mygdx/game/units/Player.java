@@ -2,6 +2,7 @@ package com.mygdx.game.units;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.projectiles.PlayerProjectile;
@@ -14,9 +15,16 @@ import java.util.ArrayList;
  */
 public class Player extends Unit {
     private final ArrayList<Unit> unitArrayList;
+    private final BitmapFont text = new BitmapFont();
     private int otocenie = 1;
     private final ArrayList<PlayerProjectile> projectiles = new ArrayList<>();
     private float cooldown = 1;
+    private boolean isDashing = false;
+    private float dashTime = 0;
+    private float dashCooldown = 0;
+    private static final float DASH_DURATION = 0.2f;
+    private static final float DASH_SPEED = 500;
+    private static final float DASH_COOLDOWN = 1.0f;
 
     /**
      * Konštruktor triedy Player.
@@ -35,25 +43,56 @@ public class Player extends Unit {
     @Override
     public void update(float deltaTime) {
         float speed = 250;
+        float currentSpeed = speed;
+
+        // Dash logic
+        if (isDashing) {
+            dashTime -= deltaTime;
+            if (dashTime <= 0) {
+                isDashing = false;
+                dashCooldown = DASH_COOLDOWN;
+            } else {
+                currentSpeed = DASH_SPEED;
+            }
+        } else {
+            if (dashCooldown > 0) {
+                dashCooldown -= deltaTime;
+            }
+            if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && dashCooldown <= 0) {
+                isDashing = true;
+                dashTime = DASH_DURATION;
+            }
+        }
+
+        // Movement logic
         if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            this.getPosition().x -= deltaTime * speed;
+            this.getPosition().x -= deltaTime * currentSpeed;
             if (this.otocenie == 1) {
                 this.getSprite().flip(true, false);
                 this.otocenie = 0;
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            this.getPosition().x += deltaTime * speed;
+            this.getPosition().x += deltaTime * currentSpeed;
             if (this.otocenie == 0) {
                 this.getSprite().flip(true, false);
                 this.otocenie = 1;
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            this.getPosition().y -= deltaTime * speed;
+            this.getPosition().y -= deltaTime * currentSpeed;
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            this.getPosition().y += deltaTime * speed;
+            this.getPosition().y += deltaTime * currentSpeed;
+        }
+    }
+
+    private void showDashCooldown(SpriteBatch batch) {
+
+        if (this.dashCooldown <= 0) {
+            text.draw(batch, "Dash ready", this.getPozicia().x - 6, this.getPozicia().y);
+        } else {
+            text.draw(batch, String.format("%.2g%n", this.dashCooldown), this.getPozicia().x + 18, this.getPozicia().y);
         }
     }
 
@@ -111,5 +150,9 @@ public class Player extends Unit {
             }
         }
         return closestEnemy;
+    }
+
+    public void playerSpecifics(SpriteBatch batch) {
+        this.showDashCooldown(batch);
     }
 }

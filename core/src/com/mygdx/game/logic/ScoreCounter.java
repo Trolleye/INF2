@@ -12,7 +12,8 @@ import java.nio.file.Paths;
  * Trieda ScoreCounter slúži na sledovanie a manipuláciu so skóre hry.
  */
 public class ScoreCounter {
-    private final BitmapFont text;
+    private final BitmapFont currentScore;
+    private final BitmapFont highScore;
     private final String highScoreFilePath;
     private  int score = 0;
 
@@ -21,7 +22,8 @@ public class ScoreCounter {
      * Vytvára novú inštanciu ScoreCounter s vytvoreným textovým fontom a prednastavenou cestou k súboru s najvyšším skóre.
      */
     public ScoreCounter() {
-        this.text = new BitmapFont();
+        this.currentScore = new BitmapFont();
+        this.highScore = new BitmapFont();
         this.highScoreFilePath = "highscore.txt";
     }
 
@@ -50,7 +52,8 @@ public class ScoreCounter {
      */
 
     public void draw(SpriteBatch batch, float x, float y) {
-        this.text.draw(batch, "Score: " + this.score, x, y);
+        this.currentScore.draw(batch, "Score: " + this.score, x, y);
+        this.highScore.draw(batch, "Highscore: " + this.getHighScore(), x + 1, y - 16);
     }
 
     /**

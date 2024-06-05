@@ -59,6 +59,7 @@ public abstract class Unit {
         this.update(Gdx.graphics.getDeltaTime());
         this.attack(Gdx.graphics.getDeltaTime(), batch);
         batch.draw(this.getSprite(), this.pozicia.x, this.pozicia.y);
+
     }
 
     /**

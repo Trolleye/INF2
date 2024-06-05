@@ -1,12 +1,7 @@
 package com.mygdx.game.logic;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.units.Bat;
-import com.mygdx.game.units.Mage;
-import com.mygdx.game.units.Player;
-import com.mygdx.game.units.Unit;
-import com.mygdx.game.units.Vampire;
-import com.mygdx.game.units.Zombie;
+import com.mygdx.game.units.*;
 
 import java.util.ArrayList;
 import java.util.Random;

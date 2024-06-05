@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.logic;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -56,6 +56,7 @@ public class GameInitialiser {
             }
             score.draw(batch, "Your Highscore: " + this.scoreCounter.getHighScore(), this.player.getPozicia().x - 90, this.player.getPozicia().y - 50);
         }
+        this.player.playerSpecifics(batch);
     }
 
     public boolean getPlayerDead() {
