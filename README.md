@@ -1,4 +1,4 @@
-# INF2 - LibGDX Game Project
+# Hero Survivors - LibGDX Game Project
 
 ## DISCLAIMER
 
