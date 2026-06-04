@@ -1,5 +1,9 @@
 # INF2 - LibGDX Game Project
 
+## DISCLAIMER
+
+The hitbox system needs tuning as well as the camera updates.
+
 ## Overview
 
 INF2 is a 2D game developed in Java using the LibGDX framework as part of the Information and Networking Technologies study program.
