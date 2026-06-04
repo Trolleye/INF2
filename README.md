@@ -62,3 +62,10 @@ This project helped me gain practical experience with:
 * Event handling
 * Asset management
 * Git version control
+
+In-Game Screenshots:
+
+<img width="1789" height="888" alt="Screenshot_4" src="https://github.com/user-attachments/assets/d27a6da9-b57a-4b0f-8dc9-eaea91278393" />
+
+<img width="1795" height="896" alt="Screenshot_5" src="https://github.com/user-attachments/assets/26330739-ecf5-4c3e-b540-b6f91c3b3239" />
+
