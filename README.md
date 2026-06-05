@@ -48,8 +48,8 @@ On Windows:
 
 ```cmd
 git clone https://github.com/Trolleye/Hero-Survivors.git
-Open releases/Hero-Survivors.jar
 ```
+and open releases/Hero-Survivors.jar
 
 To build the project run:
 
