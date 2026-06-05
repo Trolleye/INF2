@@ -6,7 +6,7 @@ The hitbox system needs tuning as well as the camera updates.
 
 ## Overview
 
-INF2 is a 2D game developed in Java using the LibGDX framework as part of the Information and Networking Technologies study program.
+Hero Survivors is a 2D game developed in Java using the LibGDX framework as part of the Information and Networking Technologies study program.
 
 The project demonstrates object-oriented programming, game loop architecture, input handling, collision detection, asset management, and game state management.
 
@@ -44,16 +44,21 @@ assets/    - Textures, sounds, fonts
 
 ### Run the Project
 
-```bash
-git clone https://github.com/Trolleye/INF2.git
-cd INF2
-./gradlew lwjgl3:run
-```
-
 On Windows:
 
 ```cmd
-gradlew.bat lwjgl3:run
+git clone https://github.com/Trolleye/Hero-Survivors.git
+Open releases/Hero-Survivors.jar
+```
+
+To build the project run:
+
+```cmd
+gradlew.bat desktop:dist
+```
+or
+```bash
+./gradlew desktop:dist
 ```
 
 ## Learning Outcomes
