@@ -6,7 +6,7 @@ The hitbox system needs tuning as well as the camera updates.
 
 ## Overview
 
-Hero Survivors is a 2D game developed in Java using the LibGDX framework as part of the Information and Networking Technologies study program.
+Hero Survivors is a 2D game developed in Java using the LibGDX framework.
 
 The project demonstrates object-oriented programming, game loop architecture, input handling, collision detection, asset management, and game state management.
 
